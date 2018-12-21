@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ListItem from "./ListItem"
 
 class CartItems extends Component {
+    
     render(){
         console.log(this.props.itemList)
         return (
@@ -15,7 +16,7 @@ class CartItems extends Component {
                         <div className="col-md-2">Quantity</div>
                     </div>
                     </div>
-                    {this.props.itemList.map((item,idx) => {
+                    {this.props.cartItemsList.map((item,idx) => {
                     return <ListItem
                         key={idx}
                         product={item.product.name}

@@ -1,39 +1,90 @@
-import React, { Component } from 'react';
-import CartItems from "./CartItems"
-import ListItem from "./ListItem"
+import React from 'react';
 
 
-class AddItem extends Component {
-    constructor(props) {
-        super(props)
-    }
 
-
-    render() {
-        console.log("this", this)
-       
+const AddItem = (props) => {
+    let newItem = props.products.map((item, idx) => {
         return (
-            <form className="needs-validation">
-                <div className="form-group">
-                    Quantity:
-                    <input type="number" name="quantity" min="1" max="200" />
-                </div>
-                
-            <button 
+            <option key={idx}>{item.name} ${item.priceInCents}</option>
+        )
+    })
+
+    return (
+        <>
+            <div className="form-group">
+                Quantity:
+                    <input
+                    className="form-control"
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    max="20000"
+                    onChange={props.updateQuantity}
+                />
+            </div>
+            <select
+                className="form-control"
+                onChange={props.updateOrder}
+            >
+                {newItem}
+            </select>
+            <button
                 type="submit"
                 className="btn-primary"
-                onClick={this.props.addTodo}>
+                onClick={props.addMenuItem}>
                 Add Item
             </button>
-            <select 
-                className="form-control">
-                {this.props.itemsToAdd.map((add) => {
-                    return <option>{add.name} ${add.priceInCents/100}</option>
-                })}
-                </select>
-            />
-            </form>
-        )
-    }
+        </>
+    )
 }
+
+
+
+// {
+
+
+
+//     render() {
+
+//         let newStuff= this.props.itemsToAdd.map((item, idx) =>{
+//             return(
+//                 <option key={idx}>{item.name} ${item.priceInCents/100}</option>
+//             )
+//         })
+
+//         return (
+//             <div>
+//             <form>
+//                 <div className="form-group">
+//                     Quantity:
+//                     <input 
+//                         className="form-control" 
+//                         type="number" 
+//                         name="quantity" 
+//                         min="1" 
+//                         max="20000"
+//                         onChange={this.props.updateQuantity} 
+//                     />
+//                 </div>
+
+
+//             <select 
+//                 className="form-control"
+//                 onChange={this.props.updateOrder}  
+//                 >
+//                 {newStuff}
+//             </select>
+
+//             <button 
+//                 type="submit"
+//                 className="btn-primary">
+//                 Add Item
+//             </button>
+
+//             </form>
+//             </div>
+
+//         )
+//     }
+// }
 export default AddItem
