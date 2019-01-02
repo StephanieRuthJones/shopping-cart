@@ -11,29 +11,34 @@ const AddItem = (props) => {
 
     return (
         <>
-            <div className="form-group">
-                Quantity:
+            <div className="container">
+                <div className="form-group">
+                    Quantity:
                     <input
+                        placeholder="Please Enter # of Items"
+                        className="form-control"
+                        type="number"
+                        name="quantity"
+                        min="1"
+                        max="20000"
+                        onChange={props.updateQuantity}
+                    />
+                </div>
+                <select
+                    defaultValue="Please Select an Item"
                     className="form-control"
-                    type="number"
-                    name="quantity"
-                    min="1"
-                    max="20000"
-                    onChange={props.updateQuantity}
-                />
-            </div>
-            <select
-                className="form-control"
-                onChange={props.updateOrder}
-            >
-                {newItem}
-            </select>
-            <button
-                type="submit"
-                className="btn-primary"
-                onClick={props.addMenuItem}>
-                Add Item
-            </button>
+                    onChange={props.updateOrder}
+                >
+                    <option disabled>Please Select an Item</option>
+                    {newItem}
+                </select>
+                <button
+                    type="submit"
+                    className="btn-primary"
+                    onClick={props.addMenuItem}>
+                    Add Item
+                </button>
+            </div >
         </>
     )
 }

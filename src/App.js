@@ -30,21 +30,27 @@ class App extends Component {
       newItem: {
         product: {
           name: '',
-          priceInCents: null
+          priceInCents: 0
         },
 
       },
-      quantity: null,
-      total: null
+      quantity: 0,
+      total: 0
     }
 
   }
 
   updateQuantity = (event) => {
-    // console.log(event.target.value)
+
     this.setState({
       quantity: event.target.value,
 
+    })
+  }
+
+  updateTotal = (event) => {
+    this.setState({
+      total: this.state.quantity * this.state.priceInCents
     })
   }
 
