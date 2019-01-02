@@ -7,9 +7,6 @@ class CartItems extends Component {
         let total = this.props.cartItemsList.reduce((acc, item) => {
             return acc + item.product.priceInCents * item.quantity
         }, 0)
-        console.log('total', total)
-
-        console.log(this.props.itemList)
         return (
             <div className="container">
                 <h1>Cart Items</h1>
