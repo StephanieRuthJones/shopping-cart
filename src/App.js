@@ -27,7 +27,7 @@ class App extends Component {
         { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
         { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
       ],
-      newOrder: {
+      newItem: {
         product: {
           name: '',
           priceInCents: null
@@ -39,7 +39,7 @@ class App extends Component {
     }
 
   }
- 
+
   updateQuantity = (event) => {
     // console.log(event.target.value)
     this.setState({
@@ -49,9 +49,16 @@ class App extends Component {
   }
 
   updateOrder = (event) => {
-    console.log(event.target.value)
+    console.log('updateOrderCOn', event.target.value)
+    const name = event.target.value.split('$')[0]
+    const price = event.target.value.split('$')[1]
     this.setState({
-      newItem: event.target.value,
+      newItem: {
+        product: {
+          name: name,
+          priceInCents: Number(price)
+        }
+      }
 
     })
   }
@@ -60,8 +67,8 @@ class App extends Component {
     var newOrder = {
       id: this.state.cartItemsList.length + 1,
       product: {
-        name: this.state.newItem,
-        priceInCents: this.state.newItem.split('$')[1],
+        name: this.state.newItem.product.name,
+        priceInCents: this.state.newItem.product.priceInCents,
       },
       quantity: this.state.quantity,
     }
