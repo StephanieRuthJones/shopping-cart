@@ -43,21 +43,16 @@ class App extends Component {
   updateQuantity = (event) => {
 
     this.setState({
-      quantity: event.target.value,
+      quantity: +event.target.value,
 
-    })
-  }
-
-  updateTotal = (event) => {
-    this.setState({
-      total: this.state.quantity * this.state.priceInCents
     })
   }
 
   updateOrder = (event) => {
     console.log('updateOrderCOn', event.target.value)
     const name = event.target.value.split('$')[0]
-    const price = event.target.value.split('$')[1]
+    const price = +event.target.value.split('$')[1]
+    console.log('price', price)
     this.setState({
       newItem: {
         product: {
@@ -74,15 +69,14 @@ class App extends Component {
       id: this.state.cartItemsList.length + 1,
       product: {
         name: this.state.newItem.product.name,
-        priceInCents: this.state.newItem.product.priceInCents,
+        priceInCents: +this.state.newItem.product.priceInCents,
       },
-      quantity: this.state.quantity,
     }
 
     this.setState(
       {
         cartItemsList: [...this.state.cartItemsList, newOrder],
-        total: this.state.total + (newOrder.priceInCents * newOrder.quantity)
+        total: this.state.total + (newOrder.product.priceInCents * this.state.quantity)
       }
     )
 
@@ -95,12 +89,14 @@ class App extends Component {
       <div>
         <NavBar />
         <CartItems
+          total={this.state.total}
           cartItemsList={this.state.cartItemsList} />
         <AddItem
           products={this.state.products}
           updateQuantity={this.updateQuantity}
           updateOrder={this.updateOrder}
           addMenuItem={this.addMenuItem}
+
         />
         <CartFooter
           copyright="&copy; 2016"
